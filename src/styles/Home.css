@@ -9,6 +9,7 @@ body {
   color: #ffffff;
   font-family: Helvetica;
   line-height: 1.5;
+  cursor: none;
 }
 h1 {
   position: absolute;
@@ -46,6 +47,27 @@ div.ball {
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
-
   mix-blend-mode: difference;
+}
+
+.button-container {
+  position: absolute;
+  background-color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s; /* for a smooth transition */
+}
+
+.button-text {
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+button {
+  cursor: none;
 }

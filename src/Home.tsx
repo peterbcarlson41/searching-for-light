@@ -48,6 +48,9 @@ const Home: React.FC = () => {
         <h1>SEARCHING FOR LIGHT</h1>
       </div>
       <div className="ball" ref={ballRef}></div>
+      <button className="button-container">
+        <span className="button-text">Reveal Me</span>
+      </button>
     </section>
   );
 };
