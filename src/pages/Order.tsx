@@ -1,11 +1,11 @@
 import { useRef, useEffect } from "react";
 
-interface HomeProps {
+interface OrderProps {
   isActive: boolean;
   onShow: () => void;
 }
 
-const Home: React.FC<HomeProps> = (props: HomeProps) => {
+const Order: React.FC<OrderProps> = (props: OrderProps) => {
   const { isActive, onShow } = props;
   const ballRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,26 +46,22 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     };
   }, []);
 
-  const handleClick = () => {
-    onShow();
-  };
-
   return (
     <>
       {isActive ? (
         <section className="bg-black text-white h-screen flex flex-col justify-center items-center relative cursor-none">
           <div className="absolute">
-            <h1 className="text-5xl font-bold">SEARCHING FOR LIGHT</h1>
+            <h1 className="text-5xl font-bold">ORDER</h1>
           </div>
           <div
             className="bg-white w-96 h-96 rounded-full pointer-events-none absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
             ref={ballRef}
           ></div>
           <button
-            onClick={handleClick}
-            className="bg-transparent hover:bg-blue-600 border-none px-4 py-2 rounded-md text-black hover:text-white hover:animate-pulse text-lg transition-background duration-300 absolute bottom-5 left-5 cursor-none"
+            onClick={onShow}
+            className="bg-transparent hover:bg-blue-600 border-none px-4 py-2 rounded-md text-black hover:text-white hover:animate-pulse text-lg duration-300 absolute top-5 left-5 cursor-none"
           >
-            Enter Here
+            Go Home
           </button>
         </section>
       ) : (
@@ -75,4 +71,4 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
   );
 };
 
-export default Home;
+export default Order;
