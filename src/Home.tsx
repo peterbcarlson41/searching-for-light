@@ -1,6 +1,4 @@
-// Scene.tsx
 import React, { useRef, useEffect } from "react";
-import "./styles/Home.css"; // Assuming you save your styles in Scene.css
 
 const Home: React.FC = () => {
   const ballRef = useRef<HTMLDivElement | null>(null);
@@ -42,14 +40,24 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  const handleClick = () => {
+    console.log("Button clicked");
+  };
+
   return (
-    <section className="sceneSection">
-      <div className="text-content">
-        <h1>SEARCHING FOR LIGHT</h1>
+    <section className="bg-black text-white h-screen flex flex-col justify-center items-center relative cursor-none">
+      <div className="absolute">
+        <h1 className="text-5xl font-bold">SEARCHING FOR LIGHT</h1>
       </div>
-      <div className="ball" ref={ballRef}></div>
-      <button className="button-container">
-        <span className="button-text">Reveal Me</span>
+      <div
+        className="bg-white w-96 h-96 rounded-full pointer-events-none absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+        ref={ballRef}
+      ></div>
+      <button
+        onClick={handleClick}
+        className="bg-transparent border-none px-10 py-4 rounded-md text-black hover:text-blue-600 text-lg transition-background duration-300 absolute bottom-0 left-0 cursor-none"
+      >
+        Enter Here
       </button>
     </section>
   );
