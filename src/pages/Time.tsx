@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface TimeProps {
   isActive: boolean;
@@ -9,6 +9,45 @@ interface TimeProps {
 const Time: React.FC<TimeProps> = (props: TimeProps) => {
   const { isActive, onShow, onHome } = props;
   const ballRef = useRef<HTMLDivElement | null>(null);
+
+  // State for input value and current time
+  const [inputValue, setInputValue] = useState("TIME");
+  const [currentTime, setCurrentTime] = useState<string>("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  // Function to get the current time in HH:MM format
+  const fetchCurrentTime = () => {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // prevent the default form submit behavior
+    setCurrentTime(fetchCurrentTime());
+    setIsSubmitted(true);
+
+    if (inputValue !== currentTime) {
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 2000);
+      setIsSubmitted(false);
+      setInputValue("TIME");
+    }
+  };
+
+  useEffect(() => {
+    setCurrentTime(fetchCurrentTime());
+    const interval = setInterval(() => {
+      setCurrentTime(fetchCurrentTime());
+    }, 60000); // Update every minute
+
+    // Clean up interval on unmount
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     let mouseX = 0;
@@ -45,15 +84,37 @@ const Time: React.FC<TimeProps> = (props: TimeProps) => {
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isActive]);
+
+  const isTimeCorrect = inputValue === currentTime;
 
   return (
     <>
       {isActive ? (
         <section className="bg-black text-white h-screen flex flex-col justify-center items-center relative cursor-none">
-          <div className="absolute">
-            <h1 className="text-5xl font-bold">TIME</h1>
-          </div>
+          <form onSubmit={handleSubmit} className="absolute">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              className="text-5xl font-bold bg-transparent border-none outline-none text-center cursor-none active:animate-none hover:animate-pulse"
+              maxLength={5}
+            />
+            {/* Hidden submit button to trigger form submission when Enter key is pressed */}
+            <input type="submit" style={{ display: "none" }} />
+          </form>
+
+          {/* Conditionally render button based on correct time and if form was submitted */}
+          {isTimeCorrect && isSubmitted && (
+            <button className="absolute top-10 mt-4 p-2 text-black bg-white rounded cursor-none bg-transparent hover:text-black hover:bg-yellow-600">
+              Proceed
+            </button>
+          )}
+          {showError && (
+            <div className="absolute top-0 left-0 w-full h-full bg-white z-50 flex items-center justify-center">
+              <h1 className="text-black text-5xl font-bold">TIME</h1>
+            </div>
+          )}
           <div
             className="bg-white w-96 h-96 rounded-full pointer-events-none absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
             ref={ballRef}
