@@ -3,10 +3,11 @@ import { useRef, useEffect } from "react";
 interface OrderProps {
   isActive: boolean;
   onShow: () => void;
+  onHome: () => void;
 }
 
 const Order: React.FC<OrderProps> = (props: OrderProps) => {
-  const { isActive, onShow } = props;
+  const { isActive, onShow, onHome } = props;
   const ballRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const Order: React.FC<OrderProps> = (props: OrderProps) => {
             ref={ballRef}
           ></div>
           <button
-            onClick={onShow}
+            onClick={onHome}
             className="bg-transparent hover:bg-blue-600 border-none px-4 py-2 rounded-md text-black hover:text-white hover:animate-pulse text-lg duration-300 absolute top-5 left-5 cursor-none"
           >
             Go Home
