@@ -55,7 +55,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
       {isActive ? (
         <section className="bg-black text-white h-screen flex flex-col justify-center items-center relative cursor-none">
           <div className="absolute">
-            <h1 className="text-5xl font-bold">SEARCHING FOR LIGHT</h1>
+            <h1 className="text-5xl font-bold">SEARCHLIGHT</h1>
           </div>
           <div
             className="bg-white w-96 h-96 rounded-full pointer-events-none absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"

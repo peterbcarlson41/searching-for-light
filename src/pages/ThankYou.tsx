@@ -11,7 +11,7 @@ interface ThankYouProps {
 }
 
 const Home: React.FC<ThankYouProps> = (props: ThankYouProps) => {
-  const { isActive, onShow, onHome } = props;
+  const { isActive, onHome } = props;
   const ballRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
