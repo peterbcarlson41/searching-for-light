@@ -10,6 +10,16 @@ interface PatienceProps {
 const Patience: React.FC<PatienceProps> = (props: PatienceProps) => {
   const { isActive, onShow, onHome } = props;
   const ballRef = useRef<HTMLDivElement | null>(null);
+  const [showPatienceMsg, setShowPatienceMsg] = useState(false);
+
+  const handleButtonClick = () => {
+    if (!isClickable) {
+      setShowPatienceMsg(true);
+      setTimeout(() => setShowPatienceMsg(false), 2000); // hide message after 2 seconds
+    } else {
+      onShow();
+    }
+  };
 
   useEffect(() => {
     let mouseX = 0;
@@ -70,6 +80,11 @@ const Patience: React.FC<PatienceProps> = (props: PatienceProps) => {
     <>
       {isActive ? (
         <section className="bg-black text-white h-screen flex flex-col justify-center items-center relative cursor-none">
+          {showPatienceMsg && (
+            <div className="absolute w-full h-screen bg-white flex items-center justify-center z-50">
+              <h2 className="text-black text-5xl font-bold">PATIENCE</h2>
+            </div>
+          )}
           <div className="absolute">
             <h1 className="text-5xl font-bold">PATIENCE</h1>
           </div>
@@ -89,7 +104,7 @@ const Patience: React.FC<PatienceProps> = (props: PatienceProps) => {
             }`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={isClickable ? onShow : undefined} // you can replace 'onShow' with any other action
+            onClick={handleButtonClick}
           >
             <span>Click Me</span>
           </button>

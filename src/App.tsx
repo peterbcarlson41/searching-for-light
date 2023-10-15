@@ -4,6 +4,7 @@ import Home from "./pages/Home.js";
 import Patience from "./pages/Patience.js";
 import Order from "./pages/Order";
 import Time from "./pages/Time";
+import ThankYou from "./pages/ThankYou";
 
 const App: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -34,6 +35,15 @@ const App: React.FC = () => {
     case 3:
       CurrentPage = (
         <Time
+          isActive
+          onShow={() => setActiveIndex(4)}
+          onHome={() => setActiveIndex(0)}
+        />
+      );
+      break;
+    case 4:
+      CurrentPage = (
+        <ThankYou
           isActive
           onShow={() => setActiveIndex(0)}
           onHome={() => setActiveIndex(0)}
