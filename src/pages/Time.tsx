@@ -106,7 +106,10 @@ const Time: React.FC<TimeProps> = (props: TimeProps) => {
 
           {/* Conditionally render button based on correct time and if form was submitted */}
           {isTimeCorrect && isSubmitted && (
-            <button className="absolute top-10 mt-4 p-2 text-black bg-white rounded cursor-none bg-transparent hover:text-black hover:bg-yellow-600">
+            <button
+              onClick={onShow}
+              className="absolute top-10 mt-4 p-2 text-black bg-white rounded cursor-none bg-transparent hover:text-black hover:bg-yellow-600"
+            >
               Proceed
             </button>
           )}
@@ -119,6 +122,12 @@ const Time: React.FC<TimeProps> = (props: TimeProps) => {
             className="bg-white w-96 h-96 rounded-full pointer-events-none absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
             ref={ballRef}
           ></div>
+          <button
+            onClick={onHome}
+            className="bg-transparent hover:bg-blue-600 border-none px-4 py-2 rounded-md text-black hover:text-white hover:animate-pulse text-lg duration-300 absolute top-5 left-5 cursor-none"
+          >
+            Return Home
+          </button>
         </section>
       ) : (
         <></>

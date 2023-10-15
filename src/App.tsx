@@ -11,7 +11,7 @@ const App: React.FC = () => {
   let CurrentPage;
   switch (activeIndex) {
     case 0:
-      CurrentPage = <Home isActive onShow={() => setActiveIndex(3)} />;
+      CurrentPage = <Home isActive onShow={() => setActiveIndex(1)} />;
       break;
     case 1:
       CurrentPage = (
